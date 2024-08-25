@@ -4,6 +4,9 @@ class Program {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 
+        String[] nomeAlunos;
+        float[] notas = new float[3];
+        float[] media;
         System.out.println("====Escola Primaria Anderson Balieiro====");
 
         System.out.print("Informe a turma que irá digitar as notas: ");
@@ -20,30 +23,46 @@ class Program {
 
         System.out.print("Informe a quantidade de alunos na sala:");
         int quantidadeAlunos = sc.nextInt();
+        nomeAlunos = new String[quantidadeAlunos];
+        media = new float[quantidadeAlunos];
 
-        for(int cont = 1; cont <= quantidadeAlunos; cont++){
+        for(int cont = 0; cont < quantidadeAlunos; cont++){
             System.out.println("=========================");
             sc.nextLine();
             System.out.print("Nome: ");
-            String nomeAluno = sc.nextLine();
+            nomeAlunos[cont] = sc.nextLine();
 
-            System.out.print("Nota 1: ");
-            int notaUm = sc.nextInt();
+            float somaNotas = 0;
+            for(int contNota = 0; contNota < notas.length; contNota++){
 
-            System.out.print("Nota 2: ");
-            int notaDois = sc.nextInt();
+                System.out.print("Nota " + (contNota+1) + ": ");
+                notas[contNota] = sc.nextFloat();
+    
+                somaNotas += notas[contNota];
+            }
 
-            System.out.print("Nota 3: ");
-            int notaTres = sc.nextInt();
-
-            float mediaNota = (notaUm + notaDois + notaTres) / 3;
-
-            if (mediaNota >= 6) {
-                System.out.println(String.format("%s parabéns você passou :), sua média é: %.1f", nomeAluno, mediaNota));
+            media[cont] = somaNotas / 3 ;
+            if (media[cont] >= 6) {
+                System.out.println(String.format("%s parabéns você passou :), sua média é: %.1f", nomeAlunos[cont], media[cont]));
             }else{
-                System.out.println(String.format("%s você está de recuperação :(, sua média é: %.1f", nomeAluno, mediaNota));
+                System.out.println(String.format("%s você está de recuperação :(, sua média é: %.1f", nomeAlunos[cont], media[cont]));
             }
             
+        }
+
+        System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+        for(String nomes: nomeAlunos){
+            System.out.println(String.format("Aluno: %s", nomes));
+
+            int contMais = 0;
+            for(float nota: notas){
+                System.out.println(String.format("nota " + (contMais+1) +": %.1f", nota));
+                contMais++;
+            }
+            
+            int contMedia =0;
+            System.out.println("Media: " + media[contMedia]);
+            contMedia++;
         }
 
         sc.close();
