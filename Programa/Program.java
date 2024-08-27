@@ -10,59 +10,92 @@ class Program {
         float[] media;
         System.out.println("====Escola Primaria Anderson Balieiro====");
 
-        System.out.print("Informe a turma que irá digitar as notas: ");
-        char turma = sc.next().charAt(0);
-
-        System.out.print("Informe a Série: ");
-        int serie = sc.nextInt();
+        char turma = solicitarTurma(sc);
+        int serie = solicitarSerie(sc);
 
         while (serie < 1 || serie > 9) {
             System.out.println("Informe uma série valida.");
-            System.out.print("Informe a Série: ");
-            serie = sc.nextInt();
+            serie = solicitarSerie(sc);
         }
 
-        System.out.print("Informe a quantidade de alunos na sala:");
-        int quantidadeAlunos = sc.nextInt();
+        int quantidadeAlunos = solicitarQuantidadeAlunos(sc);
         nomeAlunos = new String[quantidadeAlunos];
         notas = new float[quantidadeAlunos][quantidadeDeNotasBimestrais];
         media = new float[quantidadeAlunos];
 
         for(int cont = 0; cont < quantidadeAlunos; cont++){
-            System.out.println("=========================");
-            sc.nextLine();
-            System.out.print("Nome: ");
-            nomeAlunos[cont] = sc.nextLine();
-
-            float somaNotas = 0;
-            for(int contNota = 0; contNota < quantidadeDeNotasBimestrais; contNota++){
-
-                System.out.print("Nota " + (contNota+1) + ": ");
-                notas[cont][contNota] = sc.nextFloat();
-    
-                somaNotas += notas[cont][contNota];
-            }
-
-            media[cont] = somaNotas / 3 ;
-            if (media[cont] >= 6) {
-                System.out.println(String.format("%s parabéns você passou :), sua média é: %.1f", nomeAlunos[cont], media[cont]));
-            }else{
-                System.out.println(String.format("%s você está de recuperação :(, sua média é: %.1f", nomeAlunos[cont], media[cont]));
-            }
+            nomeAlunos[cont] = solicitarNomeAluno(sc, cont);
+            media[cont] = calcularMediaAluno(sc, notas[cont]);
+            exibirResultadoAluno(nomeAlunos[cont], media[cont]);
             
         }
 
-        System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+");
-        for(int cont = 0; cont < quantidadeAlunos; cont++){
-            System.out.println(String.format("Aluno: %s", nomeAlunos[cont]));
-
-            for(int contNota = 0; contNota < quantidadeDeNotasBimestrais; contNota++){
-                System.out.println(String.format("Nota " + (contNota+1) +": %.1f", notas[cont][contNota]));
-            }            
-            
-            System.out.println("Media: " + media[cont]);
-        }
+        exibirResultadosFinais(nomeAlunos, notas, media);
 
         sc.close();
+    }
+
+    // Método para solicitar a turma
+    static char solicitarTurma(Scanner sc) {
+        System.out.print("Informe a turma que irá digitar as notas: ");
+        return sc.next().charAt(0);
+    }
+
+    // Método para solicitar e validar a série
+    static int solicitarSerie(Scanner sc) {
+        System.out.print("Informe a Série: ");
+        int serie = sc.nextInt();
+        while (serie < 1 || serie > 9) {
+            System.out.println("Informe uma série valida.");
+            System.out.print("Informe a Série: ");
+            serie = sc.nextInt();
+        }
+        return serie;
+    }
+
+    // Método para solicitar a quantidade de alunos
+    static int solicitarQuantidadeAlunos(Scanner sc) {
+        System.out.print("Informe a quantidade de alunos na sala: ");
+        return sc.nextInt();
+    }
+
+    // Método para solicitar o nome do aluno
+    static String solicitarNomeAluno(Scanner sc, int indice) {
+        sc.nextLine(); // Consumir a quebra de linha
+        System.out.println("=========================");
+        System.out.print("Nome do aluno " + (indice + 1) + ": ");
+        return sc.nextLine();
+    }
+
+    // Método para calcular a média de um aluno
+    static float calcularMediaAluno(Scanner sc, float[] notas) {
+        float somaNotas = 0;
+        for (int j = 0; j < 3; j++) {
+            System.out.print("Nota " + (j + 1) + ": ");
+            notas[j] = sc.nextFloat();
+            somaNotas += notas[j];
+        }
+        return somaNotas / 3;
+    }
+
+    // Método para exibir o resultado de um aluno
+    static void exibirResultadoAluno(String nome, float media) {
+        if (media >= 6) {
+            System.out.println(String.format("%s, parabéns você passou :), sua média é: %.1f", nome, media));
+        } else {
+            System.out.println(String.format("%s, você está de recuperação :(, sua média é: %.1f", nome, media));
+        }
+    }
+
+    // Método para exibir os resultados finais
+    static void exibirResultadosFinais(String[] nomeAlunos, float[][] notas, float[] media) {
+        System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+        for (int i = 0; i < nomeAlunos.length; i++) {
+            System.out.println(String.format("Aluno: %s", nomeAlunos[i]));
+            for (int j = 0; j < 3; j++) {
+                System.out.println(String.format("Nota " + (j + 1) + ": %.1f", notas[i][j]));
+            }
+            System.out.println("Média: " + media[i]);
+        }
     }
 }
