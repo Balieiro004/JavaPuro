@@ -4,8 +4,9 @@ class Program {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 
+        int quantidadeDeNotasBimestrais = 3;
         String[] nomeAlunos;
-        float[] notas = new float[3];
+        float[][] notas;
         float[] media;
         System.out.println("====Escola Primaria Anderson Balieiro====");
 
@@ -24,6 +25,7 @@ class Program {
         System.out.print("Informe a quantidade de alunos na sala:");
         int quantidadeAlunos = sc.nextInt();
         nomeAlunos = new String[quantidadeAlunos];
+        notas = new float[quantidadeAlunos][quantidadeDeNotasBimestrais];
         media = new float[quantidadeAlunos];
 
         for(int cont = 0; cont < quantidadeAlunos; cont++){
@@ -33,12 +35,12 @@ class Program {
             nomeAlunos[cont] = sc.nextLine();
 
             float somaNotas = 0;
-            for(int contNota = 0; contNota < notas.length; contNota++){
+            for(int contNota = 0; contNota < quantidadeDeNotasBimestrais; contNota++){
 
                 System.out.print("Nota " + (contNota+1) + ": ");
-                notas[contNota] = sc.nextFloat();
+                notas[cont][contNota] = sc.nextFloat();
     
-                somaNotas += notas[contNota];
+                somaNotas += notas[cont][contNota];
             }
 
             media[cont] = somaNotas / 3 ;
@@ -51,18 +53,14 @@ class Program {
         }
 
         System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+");
-        for(String nomes: nomeAlunos){
-            System.out.println(String.format("Aluno: %s", nomes));
+        for(int cont = 0; cont < quantidadeAlunos; cont++){
+            System.out.println(String.format("Aluno: %s", nomeAlunos[cont]));
 
-            int contMais = 0;
-            for(float nota: notas){
-                System.out.println(String.format("nota " + (contMais+1) +": %.1f", nota));
-                contMais++;
-            }
+            for(int contNota = 0; contNota < quantidadeDeNotasBimestrais; contNota++){
+                System.out.println(String.format("Nota " + (contNota+1) +": %.1f", notas[cont][contNota]));
+            }            
             
-            int contMedia =0;
-            System.out.println("Media: " + media[contMedia]);
-            contMedia++;
+            System.out.println("Media: " + media[cont]);
         }
 
         sc.close();
