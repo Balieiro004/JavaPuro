@@ -18,7 +18,7 @@ public class Aluno {
         this.nome = nome;
     }
     //
-    public float[] getNota(){
+    public float[] getNotas(){
         return notas;
     }
     //
