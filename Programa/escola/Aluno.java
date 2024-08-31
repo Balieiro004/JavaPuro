@@ -5,7 +5,7 @@ public class Aluno {
     private float[] notas;
     private float media;
 
-    Aluno(String nome){
+    public Aluno(String nome){
         this.nome = nome;
         this.notas = new float[3];
     }
