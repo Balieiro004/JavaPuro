@@ -12,10 +12,10 @@ class Program {
 
         Escola escola = new Escola("Escola Primaria Anderson Balieiro");
 
+        int serie = solicitarSerie(sc);
+
         System.out.print("Informe a turma que irá digitar as notas: ");
         char turma = sc.next().charAt(0);
-
-        int serie = solicitarSerie(sc);
 
         Turma novaTurma = new Turma(turma, serie);
 
