@@ -31,7 +31,7 @@ public class Turma {
                 System.out.println(String.format("Nota " + (i + 1) + ": %.1f", notas[i]));
             }
             System.out.println("Média: " + aluno.getMedia());
-            aluno.exibirResultado();
+            aluno.exibirInformacoes();
             System.out.println("-----------------------");
         }
     }
