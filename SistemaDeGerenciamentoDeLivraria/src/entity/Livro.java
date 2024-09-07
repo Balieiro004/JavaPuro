@@ -52,8 +52,15 @@ public class Livro {
             this.quantidadeEstoque -= quantidade;
             return  quantidade * this.preco;
         }else {
-            System.out.println(String.format("Estoque insuficiente. Apenas %i unidades disponiveis."));
+            System.out.println("Estoque insuficiente. Apenas " + getQuantidadeEstoque() + " unidades disponiveis.");
             return 0;
+        }
+    }
+
+    public void adicionarEstoque(int quantidade){
+        if (quantidade > 0){
+            this.quantidadeEstoque += quantidade;
+            System.out.println("Estoque atualizado: " + getQuantidadeEstoque());
         }
     }
 }
