@@ -61,6 +61,8 @@ public class Livro {
         if (quantidade > 0){
             this.quantidadeEstoque += quantidade;
             System.out.println("Estoque atualizado: " + getQuantidadeEstoque());
+        }else{
+            System.out.println("A quantidade deve ser maior que 0.");
         }
     }
 }
