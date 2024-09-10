@@ -1,17 +1,21 @@
 package entity;
 
+import enun.Categoria;
+
 public class Livro {
 
     private String titulo;
     private String autor;
     private double preco;
     private int quantidadeEstoque;
+    private Categoria categoria;
 
-    public Livro(String titulo, String autor, double preco, int quantidadeEstoque) {
+    public Livro(String titulo, String autor, double preco, int quantidadeEstoque, Categoria categoria) {
         this.titulo = titulo;
         this.autor = autor;
         this.preco = preco;
         this.quantidadeEstoque = quantidadeEstoque;
+        this.categoria = categoria;
     }
 
     public String getTitulo() {
@@ -44,6 +48,12 @@ public class Livro {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+    public Categoria getCategoria(){
+        return  categoria;
+    }
+    public void setCategoria(Categoria categoria){
+        this.categoria = categoria;
     }
 
     public double venderLivro(int quantidade){

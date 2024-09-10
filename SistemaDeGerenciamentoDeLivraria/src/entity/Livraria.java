@@ -41,7 +41,7 @@ public class Livraria {
         }else{
             System.out.println("Livros disponíveis: ");
             for(Livro livro : livros){
-                System.out.println("Titulo: " + livro.getTitulo() +", Autor: " + livro.getAutor() + ", Preço: R$: " + livro.getPreco() + ", Estoque: " + livro.getQuantidadeEstoque());
+                System.out.println("Titulo: " + livro.getTitulo() +", Autor: " + livro.getAutor() + ", Preço: R$: " + livro.getPreco() + ", Estoque: " + livro.getQuantidadeEstoque() + ", Categoria: " + livro.getCategoria());
             }
         }
     }
