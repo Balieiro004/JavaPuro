@@ -4,7 +4,7 @@ import escola.Aluno;
 import escola.Escola;
 import escola.Turma;
 
-class Program {
+    class Program {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 

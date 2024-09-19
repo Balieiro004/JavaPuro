@@ -1,6 +1,7 @@
 package entity;
 
 import enun.Categoria;
+import exception.EstoqueInsuficienteException;
 
 public class Livro {
 
@@ -56,14 +57,13 @@ public class Livro {
         this.categoria = categoria;
     }
 
-    public double venderLivro(int quantidade){
+    public double venderLivro(int quantidade) throws EstoqueInsuficienteException {
 
         if(quantidade <= this.quantidadeEstoque){
             this.quantidadeEstoque -= quantidade;
             return  quantidade * this.preco;
         }else {
-            System.out.println("Estoque insuficiente. Apenas " + getQuantidadeEstoque() + " unidades disponiveis.");
-            return 0;
+            throw new EstoqueInsuficienteException("Estoque insuficiente. Apenas " + getQuantidadeEstoque() + " unidades disponiveis.");
         }
     }
 

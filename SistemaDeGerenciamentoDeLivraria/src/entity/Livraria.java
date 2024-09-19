@@ -1,5 +1,8 @@
 package entity;
 
+import exception.EstoqueInsuficienteException;
+import exception.LivroNaoEncontradoException;
+
 import java.util.ArrayList;
 
 public class Livraria {
@@ -15,24 +18,23 @@ public class Livraria {
         System.out.println("Livro adicionado: " + livro.getTitulo());
     }
 
-    public Livro buscarLivroPorTitulo(String titulo){
+    public Livro buscarLivroPorTitulo(String titulo) throws LivroNaoEncontradoException {
         for (Livro livro: livros){
             if (livro.getTitulo().equalsIgnoreCase(titulo)){
                 return livro;
             }
         }
-        System.out.println("Livro '" + titulo + "' não encontrado");
-        return null;
+        throw  new LivroNaoEncontradoException("Livro '" + titulo + "' não encontrado");
     }
     public void venderLivro(String titulo, int quantidade){
-        Livro livro = buscarLivroPorTitulo(titulo);
-        if (livro != null){
+        try{
+            Livro livro = buscarLivroPorTitulo(titulo);
             double totalVenda = livro.venderLivro(quantidade);
-            if (totalVenda > 0){
-                System.out.println("Venda realizada: " + quantidade + " unidades de '" + titulo +"'.");
-                System.out.println("Venda total: R$ " + totalVenda);
-            }
+            System.out.println("Venda realizada: " + quantidade + " unidades de '" + titulo +"'.");
+        }catch (LivroNaoEncontradoException | EstoqueInsuficienteException e){
+            System.out.println("Erro na venda: " + e.getMessage());
         }
+
     }
 
     public void listarLivros(){
